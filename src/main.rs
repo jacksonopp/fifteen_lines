@@ -45,12 +45,13 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .color(CORNSILK);
 
     model.lines.iter().for_each(|line| {
-        draw.line()
-            .start(line.start)
-            .end(line.end)
-            .weight(line.weight)
-            .color(Rgba::new(0.0, 0.0, 0.0, line.value))
-            .caps(LineCap::Round);
+        line.lines.iter().for_each(|l| {
+            draw.line()
+                .points(l.start, l.end)
+                .caps(LineCap::Round)
+                .weight(l.weight)
+                .color(BLACK);
+        })
     });
 
     draw.to_frame(app, &frame).unwrap();
