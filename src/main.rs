@@ -1,4 +1,4 @@
-use nannou::{prelude::*, color::named};
+use nannou::{prelude::*, color::named, lyon::lyon_tessellation::LineCap};
 
 mod models;
 use models::Model;
@@ -36,14 +36,20 @@ fn event(app: &App, model: &mut Model, event: Event) {
     }
 }
 
-fn view(app: &App, _model: &Model, frame: Frame) {
+fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
 
-    draw.background().color(named::CORNSILK);
-    draw.ellipse()
-        .x_y(0.0, 0.0)
-        .color(named::GREEN)
-        .radius(20.0);
+    draw.background()
+        .color(CORNSILK);
+
+    model.lines.iter().for_each(|line| {
+        draw.line()
+            .start(line.start)
+            .end(line.end)
+            .weight(line.weight)
+            .color(Rgba::new(0.0, 0.0, 0.0, line.value))
+            .caps(LineCap::Round);
+    });
 
     draw.to_frame(app, &frame).unwrap();
 
