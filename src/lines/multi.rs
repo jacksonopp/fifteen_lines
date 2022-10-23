@@ -63,8 +63,13 @@ impl Line for MultiLine {
 }
 
 fn get_pos_in_circle(center: &Point2, radius: f32) -> Point2 {
-    let r = radius * random_f32().sqrt();
-    let theta = random_f32() * 2.0 * PI;
+    let t = 2.0 * PI * random_f32();
+    let u = random_f32() * radius + random_f32() * radius;
+    let r = if u > radius {
+        radius - u
+    } else {
+        u
+    };
 
-    Point2::new(center.x + r + theta.cos(), center.y + r + theta.sin())
+    Point2::new(center.x + r * t.cos(), center.y + r * t.sin())
 }

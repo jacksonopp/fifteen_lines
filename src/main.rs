@@ -50,7 +50,7 @@ fn view(app: &App, model: &Model, frame: Frame) {
                 .points(l.start, l.end)
                 .caps(LineCap::Round)
                 .weight(l.weight)
-                .color(BLACK);
+                .color(Rgba::new(0.0, 0.0, 0.0, l.value));
         })
     });
 
