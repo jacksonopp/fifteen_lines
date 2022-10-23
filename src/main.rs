@@ -5,6 +5,8 @@ use models::Model;
 
 mod events;
 
+mod lines;
+
 fn main() {
     nannou::app(model).event(event).run()
 }
